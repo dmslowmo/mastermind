@@ -34,7 +34,7 @@ void Game::play() {
 		char c;
 		while(std::cin >> c) {
 			guess.push_back(atoi(&c));
-			if (guess.size() == 4) break;
+			if (guess.size() == codeLength) break;
 		}
 
 		board.insert(i, guess);
