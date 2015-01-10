@@ -10,13 +10,14 @@
 
 #include "Board.h"
 
-namespace Mastermind {
+namespace mastermind {
 
 class Game {
 public:
 	Game();
 	virtual ~Game();
 	void play();
+	void showOpeningScreen();
 
 private:
 	int maxAttempts;

@@ -10,7 +10,7 @@
 #include<chrono>
 #include "Board.h"
 
-namespace Mastermind {
+namespace mastermind {
 
 //FEEDBACK codes
 const char CORRECT = 'C';
@@ -18,6 +18,7 @@ const char MISPLACED = 'M';
 
 Board::Board(int maxAttempts, int codeLength) :
 		codeLength(codeLength), maxAttempts(maxAttempts), attemptNo(0) {
+	initialize();
 }
 
 Board::~Board() {
@@ -49,7 +50,7 @@ void Board::check(int rowIndex) {
 	display(feedback);
 }
 
-bool Board::found(int idx, std::vector<int> skipIndex) {
+bool Board::found(int idx, const std::vector<int>& skipIndex) const {
 	for (auto i : skipIndex) {
 		if (i == idx)
 			return true;
@@ -69,11 +70,11 @@ void Board::initialize() {
 	attemptNo = 0;
 }
 
-bool Board::isMaxAttempt() {
+bool Board::isMaxAttempt() const {
 	return attemptNo == maxAttempts;
 }
 
-bool Board::isCodeCracked() {
+bool Board::isCodeCracked() const {
 	std::vector<char> feedback = feedbackRows.at(attemptNo-1);
 
 	if (feedback.size() < code.size()) {
@@ -89,7 +90,7 @@ bool Board::isCodeCracked() {
 	return true;
 }
 
-void Board::showCode() {
+void Board::showCode() const {
 	display(code);
 }
 
@@ -104,7 +105,7 @@ void Board::generateCode() {
 }
 
 template<typename T>
-void Board::display(std::vector<T> row) {
+void Board::display(const std::vector<T>& row) const {
 	for (auto f : row) {
 		std::cout << f;
 	}

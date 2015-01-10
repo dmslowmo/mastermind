@@ -11,7 +11,7 @@
 #include <map>
 #include <vector>
 
-namespace Mastermind {
+namespace mastermind {
 
 class Board {
 public:
@@ -19,15 +19,15 @@ public:
 	virtual ~Board();
 	void check(int rowIndex);
 	void insert(int rowIndex, std::vector<int> guess);
-	void initialize();
-	bool isMaxAttempt();
-	bool isCodeCracked();
-	void showCode();
+	bool isMaxAttempt() const;
+	bool isCodeCracked() const;
+	void showCode() const;
 
 private:
+	void initialize();
 	void generateCode();
-	template<typename T> void display(std::vector<T> row);
-	bool found(int idx, std::vector<int> skipIndex);
+	template<typename T> void display(const std::vector<T>& row) const;
+	bool found(int idx, const std::vector<int>& skipIndex) const;
 	std::vector<int> code;
 	int codeLength;
 	int maxAttempts;

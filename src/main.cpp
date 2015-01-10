@@ -9,18 +9,20 @@
 #include "Board.h"
 #include "Game.h"
 
-using namespace Mastermind;
+using namespace mastermind;
 
 int main() {
 
 	bool playAgain = true;
 	char response;
 	Game g;
+	g.showOpeningScreen();
 	while (playAgain) {
 		g.play();
 		std::cout << "Play again? (Y to continue, or other keys to quit): ";
 		std::cin >> response;
 		playAgain = (response == 'Y' || response == 'y');
+		std::cout << std::endl;
 	}
 
 	std::cout << "Thanks for playing. Bye!" << std::endl;
