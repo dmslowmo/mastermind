@@ -100,8 +100,7 @@ void Board::generateCode() {
 		srand(seed);
 		code.push_back(rand()%(codeLength*2));
 	}
-	display(code);
-	std::cout << std::endl;
+//	display(code);
 }
 
 template<typename T>
