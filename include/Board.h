@@ -26,7 +26,7 @@ public:
 private:
 	void initialize();
 	void generateCode();
-	template<typename T> void display(const std::vector<T>& row) const;
+	template<typename T> void display(std::ostream& out, const std::vector<T>& row) const;
 	std::vector<int> code;
 	int codeLength;
 	int maxAttempts;

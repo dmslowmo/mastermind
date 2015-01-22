@@ -59,7 +59,7 @@ void Board::check(int rowIndex) {
 		feedbackRows[rowIndex] = feedback;
 	}
 	std::cout << "\t";
-	display(feedback);
+	display(std::cout, feedback);
 }
 
 void Board::insert(int rowIndex, const std::vector<int>& guess) {
@@ -95,7 +95,7 @@ bool Board::isCodeCracked() const {
 }
 
 void Board::showCode() const {
-	display(code);
+	display(std::cout, code);
 }
 
 void Board::generateCode() {
@@ -109,11 +109,11 @@ void Board::generateCode() {
 }
 
 template<typename T>
-void Board::display(const std::vector<T>& row) const {
+void Board::display(std::ostream& out, const std::vector<T>& row) const {
 	for (auto f : row) {
-		std::cout << f;
+		out << f;
 	}
-	std::cout << std::endl;
+	out << std::endl;
 }
 
 } /* namespace Mastermind */
