@@ -16,6 +16,7 @@ int main() {
 	bool playAgain = true;
 	char response;
 	Game g;
+
 	g.showOpeningScreen();
 	while (playAgain) {
 		g.play();

@@ -5,10 +5,12 @@
  *      Author: daniel
  */
 
-#include<iostream>
-#include<cstdlib>
-#include<map>
-#include "Game.h"
+#include <Board.h>
+#include <Game.h>
+#include <cstdlib>
+#include <iostream>
+#include <istream>
+#include <vector>
 
 namespace mastermind {
 
@@ -24,12 +26,10 @@ void Game::play() {
 	std::cout << "Game started, you have " << maxAttempts << " chances!" << std::endl;
 
 	Board board(maxAttempts, codeLength);
-	std::vector<int> guess;
 
 	for (int i = 0; !board.isMaxAttempt(); i++) {
-
 		std::cout << "Attempt " << i+1 << ": ";
-		guess.clear();
+		std::vector<int> guess;
 		char c;
 		while(std::cin >> c) {
 			guess.push_back(atoi(&c));
@@ -60,7 +60,7 @@ void Game::showOpeningScreen() {
 			  << "2. User is allowed maximum 10 attempts.\n"
 			  << "3. Enter the 4-digit guess without space or tab in between, then press \'enter\' to lock it in.\n"
 			  << "   Any input that is entered after the 4th input will be ignored.\n"
-			  << "4. Upon pressing \'enter'\ the code will be evaluated and the feedback will be displayed, represented by:\n"
+			  << "4. Upon pressing \'enter\' the code will be evaluated and the feedback will be displayed, represented by:\n"
 			  << "   a. Letter \'C\' for every digit that exists and is in the correct place.\n"
 			  << "   b. Letter \'M\' for every digit that exists but is misplaced.\n" << std::endl;
 	std::cout << std::endl;

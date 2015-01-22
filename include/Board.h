@@ -18,7 +18,7 @@ public:
 	Board(int maxAttempt, int codeLength);
 	virtual ~Board();
 	void check(int rowIndex);
-	void insert(int rowIndex, std::vector<int> guess);
+	void insert(int rowIndex, const std::vector<int>& guess);
 	bool isMaxAttempt() const;
 	bool isCodeCracked() const;
 	void showCode() const;
@@ -27,7 +27,6 @@ private:
 	void initialize();
 	void generateCode();
 	template<typename T> void display(const std::vector<T>& row) const;
-	bool found(int idx, const std::vector<int>& skipIndex) const;
 	std::vector<int> code;
 	int codeLength;
 	int maxAttempts;

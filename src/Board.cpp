@@ -10,6 +10,18 @@
 #include<chrono>
 #include "Board.h"
 
+namespace {
+
+bool found(int idx, const std::vector<int>& skipIndex) {
+	for (auto i : skipIndex) {
+		if (i == idx)
+			return true;
+	}
+	return false;
+}
+
+}
+
 namespace mastermind {
 
 //FEEDBACK codes
@@ -50,15 +62,7 @@ void Board::check(int rowIndex) {
 	display(feedback);
 }
 
-bool Board::found(int idx, const std::vector<int>& skipIndex) const {
-	for (auto i : skipIndex) {
-		if (i == idx)
-			return true;
-	}
-	return false;
-}
-
-void Board::insert(int rowIndex, std::vector<int> guess) {
+void Board::insert(int rowIndex, const std::vector<int>& guess) {
 	guessRows[rowIndex] = guess;
 }
 
