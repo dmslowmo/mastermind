@@ -8,6 +8,7 @@
 #ifndef BOARD_H_
 #define BOARD_H_
 
+#include <iostream>
 #include <map>
 #include <vector>
 

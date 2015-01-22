@@ -5,7 +5,6 @@
  *      Author: daniel
  */
 
-#include<iostream>
 #include<cstdlib>
 #include<chrono>
 #include "Board.h"
