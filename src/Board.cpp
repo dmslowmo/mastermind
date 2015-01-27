@@ -9,23 +9,45 @@
 #include<chrono>
 #include "Board.h"
 
-namespace {
-
-bool found(int idx, const std::vector<int>& skipIndex) {
-	for (auto i : skipIndex) {
-		if (i == idx)
-			return true;
-	}
-	return false;
-}
-
-}
-
-namespace mastermind {
-
 //FEEDBACK codes
 const char CORRECT = 'C';
 const char MISPLACED = 'M';
+
+namespace {
+
+int found(int idx, const std::vector<int>& skipIndex) {
+	for (unsigned int i = 0; i < skipIndex.size(); ++i) {
+		if (idx == skipIndex.at(i))
+			return i;
+	}
+	return -1;
+}
+
+void handleCorrectInsertion(int codeIndex, std::vector<int>& skipIndex, std::vector<char>& feedback) {
+	int inSkip = found(codeIndex, skipIndex);
+	if (inSkip != -1) {
+		feedback.erase(feedback.end() - 1);
+		skipIndex.erase(skipIndex.begin() + inSkip);
+	}
+	feedback.insert(feedback.begin(), CORRECT);
+	skipIndex.push_back(codeIndex);
+}
+
+void handleMisplacedInsertion(int codeIndex, const std::vector<int>& code,
+		const std::vector<int>& guess, std::vector<int>& skipIndex,
+		std::vector<char>& feedback) {
+	for (unsigned int j = 0; j < code.size(); j++) {
+		if ((found(j, skipIndex) == -1)
+				&& (code.at(codeIndex) == guess.at(j))) {
+			feedback.push_back(MISPLACED);
+			skipIndex.push_back(j);
+			break;
+		}
+	}
+}
+}
+
+namespace mastermind {
 
 Board::Board(int maxAttempts, int codeLength) :
 		codeLength(codeLength), maxAttempts(maxAttempts), attemptNo(0) {
@@ -43,21 +65,14 @@ void Board::check(int rowIndex) {
 
 	for(unsigned int i = 0; i < code.size(); i++) {
 		if (code.at(i) == guess.at(i)) {
-			feedback.insert(feedback.begin(), CORRECT);
-			skipIndex.push_back(i);
+			handleCorrectInsertion(i, skipIndex, feedback);
 		}
 		else {
-			for (unsigned int j = 0; j < code.size(); j++) {
-				if (!found(j, skipIndex) && code.at(i) == guess.at(j)) {
-					feedback.push_back(MISPLACED);
-					skipIndex.push_back(j);
-					break;
-				}
-			}
+            handleMisplacedInsertion(i, code, guess, skipIndex, feedback);
 		}
 		feedbackRows[rowIndex] = feedback;
 	}
-	std::cout << "\t";
+	std::cout << "\t\t";
 	display(std::cout, feedback);
 }
 
@@ -104,7 +119,10 @@ void Board::generateCode() {
 		srand(seed);
 		code.push_back(rand()%(codeLength*2));
 	}
-//	display(code);
+//	code = {7,7,7,0};
+//	code = {2,7,2,2};
+//	code = {6,2,6,2};
+//	display(std::cout, code);
 }
 
 template<typename T>
