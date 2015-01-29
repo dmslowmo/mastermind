@@ -14,31 +14,37 @@
 
 namespace mastermind {
 
-Game::Game() : maxAttempts(10), codeLength(4){
+Game::Game() : maxAttempts(10), codeLength(4)
+{
 
 }
 
-Game::~Game() {
+Game::~Game()
+{
 
 }
 
-void Game::play() {
+void Game::play()
+{
 	std::cout << "Game started, you have " << maxAttempts << " chances!" << std::endl;
 
 	Board board(maxAttempts, codeLength);
 
-	for (int i = 0; !board.isMaxAttempt(); i++) {
+	for (int i = 0; !board.isMaxAttempt(); i++)
+	{
 		std::cout << "Attempt " << i+1 << ": ";
 		std::vector<int> guess;
 		char c;
-		while(std::cin >> c) {
+		while(std::cin >> c)
+		{
 			guess.push_back(atoi(&c));
 			if (guess.size() == (unsigned) codeLength) break;
 		}
 
 		board.insert(i, guess);
 		board.check(i);
-		if (board.isCodeCracked()) {
+		if (board.isCodeCracked())
+		{
 			std::cout << "Code is correct, you won!!!" << std::endl;
 			return;
 		}
@@ -48,7 +54,8 @@ void Game::play() {
 	board.showCode();
 }
 
-void Game::showOpeningScreen() {
+void Game::showOpeningScreen()
+{
 	std::cout << "WELCOME TO MASTERMIND GAME" << std::endl;
 	std::cout << std::endl;
 	std::cout << "In this version, instead of 8 possible colors, 8 integers from 0 to 7 are used." << std::endl;

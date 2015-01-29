@@ -23,14 +23,16 @@ namespace {
 std::map<int, std::vector<char> > feedbackAllDigits;
 std::vector<char> feedback;
 
-void handleCorrectInsertion(int codeIndex) {
+void handleCorrectInsertion(int codeIndex)
+{
 	feedbackAllDigits[codeIndex].at(codeIndex) = CORRECT;
 }
 
 void handleMisplacedInsertion(int codeIndex, const std::vector<int>& code,
 		const std::vector<int>& guess)
 {
-	for (unsigned int j = 0; j < code.size(); j++) {
+	for (unsigned int j = 0; j < code.size(); j++)
+	{
 		if ( (feedbackAllDigits[codeIndex].at(j) != CORRECT)
 				&& (code.at(j) == guess.at(codeIndex)) )
 		{
@@ -90,24 +92,30 @@ std::vector<char> constructFeedback()
 namespace mastermind {
 
 Board::Board(int maxAttempts, int codeLength) :
-		codeLength(codeLength), maxAttempts(maxAttempts), attemptNo(0) {
+		codeLength(codeLength), maxAttempts(maxAttempts), attemptNo(0)
+{
 	initialize();
 }
 
-Board::~Board() {
+Board::~Board()
+{
 }
 
-void Board::check(int rowIndex) {
+void Board::check(int rowIndex)
+{
 	attemptNo++;
 	std::vector<int> guess = guessRows.at(rowIndex);
 
 	initFeedbackPerTurn();
 
-	for(unsigned int i = 0; i < code.size(); i++) {
-		if (code.at(i) == guess.at(i)) {
+	for(unsigned int i = 0; i < code.size(); i++)
+	{
+		if (code.at(i) == guess.at(i))
+		{
 			handleCorrectInsertion(i);
 		}
-		else {
+		else
+		{
             handleMisplacedInsertion(i, code, guess);
 		}
 	}
@@ -116,11 +124,13 @@ void Board::check(int rowIndex) {
 	display(std::cout, feedback);
 }
 
-void Board::insert(int rowIndex, const std::vector<int>& guess) {
+void Board::insert(int rowIndex, const std::vector<int>& guess)
+{
 	guessRows[rowIndex] = guess;
 }
 
-void Board::initialize() {
+void Board::initialize()
+{
 	code.clear();
 	generateCode();
 	guessRows.clear();
@@ -128,17 +138,23 @@ void Board::initialize() {
 	initFeedbackPerTurn();
 }
 
-bool Board::isMaxAttempt() const {
+bool Board::isMaxAttempt() const
+{
 	return attemptNo == maxAttempts;
 }
 
-bool Board::isCodeCracked() const {
-	if (feedback.size() < code.size()) {
+bool Board::isCodeCracked() const
+{
+	if (feedback.size() < code.size())
+	{
 		return false;
 	}
-	else {
-		for (auto f : feedback) {
-			if (f == MISPLACED) {
+	else
+	{
+		for (auto f : feedback)
+		{
+			if (f == MISPLACED)
+			{
 				return false;
 			}
 		}
@@ -146,12 +162,15 @@ bool Board::isCodeCracked() const {
 	return true;
 }
 
-void Board::showCode() const {
+void Board::showCode() const
+{
 	display(std::cout, code);
 }
 
-void Board::generateCode() {
-	for (int i = 0; i < codeLength; i++) {
+void Board::generateCode()
+{
+	for (int i = 0; i < codeLength; i++)
+	{
 		unsigned seed =
 				std::chrono::system_clock::now().time_since_epoch().count();
 		srand(seed);
@@ -164,8 +183,10 @@ void Board::generateCode() {
 }
 
 template<typename T>
-void Board::display(std::ostream& out, const std::vector<T>& row) const {
-	for (auto f : row) {
+void Board::display(std::ostream& out, const std::vector<T>& row) const
+{
+	for (auto f : row)
+	{
 		out << f;
 	}
 	out << std::endl;
