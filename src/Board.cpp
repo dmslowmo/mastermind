@@ -12,39 +12,79 @@
 //FEEDBACK codes
 const char CORRECT = 'C';
 const char MISPLACED = 'M';
+const char NULLCHAR = '\0';
+const int GUESS_IDX0 = 0;
+const int GUESS_IDX1 = 1;
+const int GUESS_IDX2 = 2;
+const int GUESS_IDX3 = 3;
 
 namespace {
 
-int found(int idx, const std::vector<int>& skipIndex) {
-	for (unsigned int i = 0; i < skipIndex.size(); ++i) {
-		if (idx == skipIndex.at(i))
-			return i;
-	}
-	return -1;
-}
+std::map<int, std::vector<char> > feedbackAllDigits;
+std::vector<char> feedback;
 
-void handleCorrectInsertion(int codeIndex, std::vector<int>& skipIndex, std::vector<char>& feedback) {
-	int inSkip = found(codeIndex, skipIndex);
-	if (inSkip != -1) {
-		feedback.erase(feedback.end() - 1);
-		skipIndex.erase(skipIndex.begin() + inSkip);
-	}
-	feedback.insert(feedback.begin(), CORRECT);
-	skipIndex.push_back(codeIndex);
+void handleCorrectInsertion(int codeIndex) {
+	feedbackAllDigits[codeIndex].at(codeIndex) = CORRECT;
 }
 
 void handleMisplacedInsertion(int codeIndex, const std::vector<int>& code,
-		const std::vector<int>& guess, std::vector<int>& skipIndex,
-		std::vector<char>& feedback) {
+		const std::vector<int>& guess)
+{
 	for (unsigned int j = 0; j < code.size(); j++) {
-		if ((found(j, skipIndex) == -1)
-				&& (code.at(codeIndex) == guess.at(j))) {
-			feedback.push_back(MISPLACED);
-			skipIndex.push_back(j);
-			break;
+		if ( (feedbackAllDigits[codeIndex].at(j) != CORRECT)
+				&& (code.at(j) == guess.at(codeIndex)) )
+		{
+			feedbackAllDigits[codeIndex].at(j) = MISPLACED;
 		}
 	}
 }
+
+void initFeedbackPerTurn()
+{
+	feedbackAllDigits.clear();
+	feedbackAllDigits[GUESS_IDX0] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
+	feedbackAllDigits[GUESS_IDX1] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
+	feedbackAllDigits[GUESS_IDX2] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
+	feedbackAllDigits[GUESS_IDX3] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
+}
+
+std::vector<char> constructFeedback()
+{
+	feedback.clear();
+
+    std::vector<char> temp = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
+	for (unsigned int codeIndex = 0; codeIndex < feedbackAllDigits.size(); ++codeIndex)
+    {
+        for (unsigned int j = 0; j < feedbackAllDigits[codeIndex].size(); ++j)
+        {
+            if (feedbackAllDigits[codeIndex][j] == CORRECT)
+            {
+            	temp.at(j) = CORRECT;
+            	break;
+            }
+            else if (temp.at(j) == NULLCHAR && feedbackAllDigits[codeIndex][j] != NULLCHAR)
+            {
+            	temp.at(j) = MISPLACED;
+            	break;
+            }
+        }
+    }
+
+	for (auto f : temp)
+	{
+		if (f == CORRECT)
+		{
+			feedback.insert(feedback.begin(), CORRECT);
+		}
+		else if (f == MISPLACED)
+		{
+			feedback.push_back(MISPLACED);
+		}
+	}
+
+	return feedback;
+}
+
 }
 
 namespace mastermind {
@@ -59,19 +99,19 @@ Board::~Board() {
 
 void Board::check(int rowIndex) {
 	attemptNo++;
-	std::vector<int> skipIndex;
 	std::vector<int> guess = guessRows.at(rowIndex);
-	std::vector<char> feedback;
+
+	initFeedbackPerTurn();
 
 	for(unsigned int i = 0; i < code.size(); i++) {
 		if (code.at(i) == guess.at(i)) {
-			handleCorrectInsertion(i, skipIndex, feedback);
+			handleCorrectInsertion(i);
 		}
 		else {
-            handleMisplacedInsertion(i, code, guess, skipIndex, feedback);
+            handleMisplacedInsertion(i, code, guess);
 		}
-		feedbackRows[rowIndex] = feedback;
 	}
+	feedback = constructFeedback();
 	std::cout << "\t\t";
 	display(std::cout, feedback);
 }
@@ -84,8 +124,8 @@ void Board::initialize() {
 	code.clear();
 	generateCode();
 	guessRows.clear();
-	feedbackRows.clear();
 	attemptNo = 0;
+	initFeedbackPerTurn();
 }
 
 bool Board::isMaxAttempt() const {
@@ -93,8 +133,6 @@ bool Board::isMaxAttempt() const {
 }
 
 bool Board::isCodeCracked() const {
-	std::vector<char> feedback = feedbackRows.at(attemptNo-1);
-
 	if (feedback.size() < code.size()) {
 		return false;
 	}

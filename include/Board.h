@@ -33,7 +33,6 @@ private:
 	int maxAttempts;
 	int attemptNo;
 	std::map<int, std::vector<int> > guessRows;
-	std::map<int, std::vector<char> > feedbackRows;
 };
 
 } /* namespace Mastermind */
