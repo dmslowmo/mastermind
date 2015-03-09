@@ -6,3 +6,4 @@ An executable named 'mastermind' will be generated.
 
 To clean:
 Inside Mastermind folder, execute: make clean
+

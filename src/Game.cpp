@@ -26,13 +26,16 @@ Game::~Game()
 
 void Game::play()
 {
-	std::cout << "Game started, you have " << maxAttempts << " chances!" << std::endl;
 
 	Board board(maxAttempts, codeLength);
+	std::vector<int> code = board.generateCode();
+	int maxAttempt = 10;
 
-	for (int i = 0; !board.isMaxAttempt(); i++)
+	std::cout << "Game started, you have " << maxAttempts << " chances!" << std::endl;
+
+	for (int attempt = 1; attempt <= maxAttempt; attempt++)
 	{
-		std::cout << "Attempt " << i+1 << ": ";
+		std::cout << "Attempt " << attempt << ": ";
 		std::vector<int> guess;
 		char c;
 		while(std::cin >> c)
@@ -41,13 +44,12 @@ void Game::play()
 			if (guess.size() == (unsigned) codeLength) break;
 		}
 
-		board.insert(i, guess);
-		board.check(i);
-		if (board.isCodeCracked())
+		if (board.isCodeCracked(guess, code))
 		{
 			std::cout << "Code is correct, you won!!!" << std::endl;
 			return;
 		}
+		guess.clear();
 	}
 
 	std::cout << "You lost :(." << "The code is: ";

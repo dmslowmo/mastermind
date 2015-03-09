@@ -87,41 +87,27 @@ std::vector<char> constructFeedback()
 	return feedback;
 }
 
+bool noMisplaced(const std::vector<char>& feedback) {
+	for (auto f : feedback) {
+		if (f == MISPLACED) {
+			return false;
+		}
+	}
+	return true;
+}
+
 }
 
 namespace mastermind {
 
 Board::Board(int maxAttempts, int codeLength) :
-		codeLength(codeLength), maxAttempts(maxAttempts), attemptNo(0)
+		codeLength(codeLength)
 {
 	initialize();
 }
 
 Board::~Board()
 {
-}
-
-void Board::check(int rowIndex)
-{
-	attemptNo++;
-	std::vector<int> guess = guessRows.at(rowIndex);
-
-	initFeedbackPerTurn();
-
-	for(unsigned int i = 0; i < code.size(); i++)
-	{
-		if (code.at(i) == guess.at(i))
-		{
-			handleCorrectInsertion(i);
-		}
-		else
-		{
-            handleMisplacedInsertion(i, code, guess);
-		}
-	}
-	feedback = constructFeedback();
-	std::cout << "\t\t";
-	display(std::cout, feedback);
 }
 
 void Board::insert(int rowIndex, const std::vector<int>& guess)
@@ -134,32 +120,28 @@ void Board::initialize()
 	code.clear();
 	generateCode();
 	guessRows.clear();
-	attemptNo = 0;
 	initFeedbackPerTurn();
 }
 
-bool Board::isMaxAttempt() const
-{
-	return attemptNo == maxAttempts;
-}
-
-bool Board::isCodeCracked() const
-{
-	if (feedback.size() < code.size())
-	{
-		return false;
-	}
-	else
-	{
-		for (auto f : feedback)
-		{
-			if (f == MISPLACED)
-			{
-				return false;
-			}
+void Board::check(const std::vector<int>& code, const std::vector<int>& guess) const {
+	initFeedbackPerTurn();
+	for (unsigned int i = 0; i < code.size(); i++) {
+		if (code.at(i) == guess.at(i)) {
+			handleCorrectInsertion(i);
+		} else {
+			handleMisplacedInsertion(i, code, guess);
 		}
 	}
-	return true;
+	feedback = constructFeedback();
+	std::cout << "\t\t";
+	display(std::cout, feedback);
+}
+
+bool Board::isCodeCracked(const std::vector<int>& guess, const std::vector<int>& code) const
+{
+	check(code, guess);
+
+	return ((feedback.size() == code.size()) & noMisplaced(feedback));
 }
 
 void Board::showCode() const
@@ -167,8 +149,9 @@ void Board::showCode() const
 	display(std::cout, code);
 }
 
-void Board::generateCode()
+std::vector<int> Board::generateCode()
 {
+	std::vector<int> code;
 	for (int i = 0; i < codeLength; i++)
 	{
 		unsigned seed =
@@ -176,6 +159,8 @@ void Board::generateCode()
 		srand(seed);
 		code.push_back(rand()%(codeLength*2));
 	}
+
+	return code;
 //	code = {7,7,7,0};
 //	code = {2,7,2,2};
 //	code = {6,2,6,2};

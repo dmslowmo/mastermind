@@ -18,20 +18,19 @@ class Board {
 public:
 	Board(int maxAttempt, int codeLength);
 	virtual ~Board();
-	void check(int rowIndex);
+	std::vector<int> generateCode();
 	void insert(int rowIndex, const std::vector<int>& guess);
 	bool isMaxAttempt() const;
-	bool isCodeCracked() const;
+	bool isCodeCracked(const std::vector<int>& guess, const std::vector<int>& code) const;
 	void showCode() const;
 
 private:
 	void initialize();
-	void generateCode();
+	void check(const std::vector<int>& code,
+			const std::vector<int>& guess) const;
 	template<typename T> void display(std::ostream& out, const std::vector<T>& row) const;
 	std::vector<int> code;
 	int codeLength;
-	int maxAttempts;
-	int attemptNo;
 	std::map<int, std::vector<int> > guessRows;
 };
 
