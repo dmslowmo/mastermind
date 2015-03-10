@@ -20,6 +20,8 @@ public:
 private:
 	int maxAttempts;
 	int codeLength;
+
+	std::vector<int> readGuess();
 };
 
 } /* namespace Mastermind */

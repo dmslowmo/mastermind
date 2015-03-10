@@ -24,31 +24,34 @@ Game::~Game()
 
 }
 
+std::vector<int> Game::readGuess() {
+	char c;
+	std::vector<int> guess;
+	while (std::cin >> c) {
+		guess.push_back(atoi(&c));
+		if (guess.size() == (unsigned) (codeLength))
+			break;
+	}
+
+	return guess;
+}
+
 void Game::play()
 {
 
 	Board board(codeLength);
-	int maxAttempt = 10;
 
 	std::cout << "Game started, you have " << maxAttempts << " chances!" << std::endl;
 
-	for (int attempt = 1; attempt <= maxAttempt; attempt++)
+	for (int attempt = 1; attempt <= maxAttempts; attempt++)
 	{
-		std::cout << "Attempt " << attempt << ": ";
-		std::vector<int> guess;
-		char c;
-		while(std::cin >> c)
-		{
-			guess.push_back(atoi(&c));
-			if (guess.size() == (unsigned) codeLength) break;
-		}
+		std::cout << "Attempt #" << attempt << ": ";
 
-		if (board.isCodeCracked(guess))
+		if (board.isCodeCracked(readGuess()))
 		{
 			std::cout << "Code is correct, you won!!!" << std::endl;
 			return;
 		}
-		guess.clear();
 	}
 
 	std::cout << "You lost :(." << "The code is: ";
