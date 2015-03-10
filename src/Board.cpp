@@ -100,7 +100,7 @@ bool noMisplaced(const std::vector<char>& feedback) {
 
 namespace mastermind {
 
-Board::Board(int maxAttempts, int codeLength) :
+Board::Board(int codeLength) :
 		codeLength(codeLength)
 {
 	initialize();

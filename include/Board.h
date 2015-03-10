@@ -16,7 +16,7 @@ namespace mastermind {
 
 class Board {
 public:
-	Board(int maxAttempt, int codeLength);
+	Board(int codeLength);
 	virtual ~Board();
 	void generateCode();
 	bool isMaxAttempt() const;

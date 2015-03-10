@@ -27,7 +27,7 @@ Game::~Game()
 void Game::play()
 {
 
-	Board board(maxAttempts, codeLength);
+	Board board(codeLength);
 	int maxAttempt = 10;
 
 	std::cout << "Game started, you have " << maxAttempts << " chances!" << std::endl;
