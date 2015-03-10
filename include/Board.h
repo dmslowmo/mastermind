@@ -18,10 +18,9 @@ class Board {
 public:
 	Board(int maxAttempt, int codeLength);
 	virtual ~Board();
-	std::vector<int> generateCode();
-	void insert(int rowIndex, const std::vector<int>& guess);
+	void generateCode();
 	bool isMaxAttempt() const;
-	bool isCodeCracked(const std::vector<int>& guess, const std::vector<int>& code) const;
+	bool isCodeCracked(const std::vector<int>& guess) const;
 	void showCode() const;
 
 private:
@@ -31,7 +30,6 @@ private:
 	template<typename T> void display(std::ostream& out, const std::vector<T>& row) const;
 	std::vector<int> code;
 	int codeLength;
-	std::map<int, std::vector<int> > guessRows;
 };
 
 } /* namespace Mastermind */

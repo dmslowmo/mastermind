@@ -110,16 +110,10 @@ Board::~Board()
 {
 }
 
-void Board::insert(int rowIndex, const std::vector<int>& guess)
-{
-	guessRows[rowIndex] = guess;
-}
-
 void Board::initialize()
 {
 	code.clear();
 	generateCode();
-	guessRows.clear();
 	initFeedbackPerTurn();
 }
 
@@ -137,7 +131,7 @@ void Board::check(const std::vector<int>& code, const std::vector<int>& guess) c
 	display(std::cout, feedback);
 }
 
-bool Board::isCodeCracked(const std::vector<int>& guess, const std::vector<int>& code) const
+bool Board::isCodeCracked(const std::vector<int>& guess) const
 {
 	check(code, guess);
 
@@ -149,9 +143,8 @@ void Board::showCode() const
 	display(std::cout, code);
 }
 
-std::vector<int> Board::generateCode()
+void Board::generateCode()
 {
-	std::vector<int> code;
 	for (int i = 0; i < codeLength; i++)
 	{
 		unsigned seed =
@@ -160,7 +153,6 @@ std::vector<int> Board::generateCode()
 		code.push_back(rand()%(codeLength*2));
 	}
 
-	return code;
 //	code = {7,7,7,0};
 //	code = {2,7,2,2};
 //	code = {6,2,6,2};

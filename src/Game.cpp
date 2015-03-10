@@ -28,7 +28,6 @@ void Game::play()
 {
 
 	Board board(maxAttempts, codeLength);
-	std::vector<int> code = board.generateCode();
 	int maxAttempt = 10;
 
 	std::cout << "Game started, you have " << maxAttempts << " chances!" << std::endl;
@@ -44,7 +43,7 @@ void Game::play()
 			if (guess.size() == (unsigned) codeLength) break;
 		}
 
-		if (board.isCodeCracked(guess, code))
+		if (board.isCodeCracked(guess))
 		{
 			std::cout << "Code is correct, you won!!!" << std::endl;
 			return;
