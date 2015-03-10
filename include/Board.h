@@ -18,7 +18,7 @@ class Board {
 public:
 	Board(int codeLength);
 	virtual ~Board();
-	void generateCode();
+	virtual void generateCode();
 	bool isMaxAttempt() const;
 	bool isCodeCracked(const std::vector<int>& guess) const;
 	void showCode() const;
