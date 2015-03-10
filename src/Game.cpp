@@ -70,7 +70,7 @@ void Game::showOpeningScreen()
 			  << "   Each digit is an integer from 0 to 7.\n"
 			  << "2. User is allowed maximum 10 attempts.\n"
 			  << "3. Enter the 4-digit guess without space or tab in between, then press \'enter\' to lock it in.\n"
-			  << "   Any input that is entered after the 4th input will be ignored.\n"
+			  << "   Any input that is entered after the 4th digit will be ignored.\n"
 			  << "4. Upon pressing \'enter\' the code will be evaluated and the feedback will be displayed, represented by:\n"
 			  << "   a. Letter \'C\' for every digit that exists and is in the correct place.\n"
 			  << "   b. Letter \'M\' for every digit that exists but is misplaced.\n" << std::endl;
