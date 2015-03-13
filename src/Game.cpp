@@ -49,13 +49,14 @@ void Game::play()
 
 		if (board.isCodeCracked(readGuess()))
 		{
-			std::cout << "Code is correct, you won!!!" << std::endl;
+			std::cout << BOLD_ON << "Code is correct, you won!!!" << RESET << std::endl;
 			return;
 		}
 	}
 
-	std::cout << "You lost :(." << "The code is: ";
+	std::cout << "You lost :(." << "The code is: " << RED_PREFIX;
 	board.showCode();
+	std::cout << RESET;
 }
 
 void Game::showOpeningScreen()

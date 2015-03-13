@@ -1,5 +1,5 @@
 CC = g++
-CPPFLAGS = -I"include" -O0 -g -Wall -std=c++11
+CPPFLAGS = -I"include" -O0 -g -Wall -Wextra -pedantic -Werror -std=c++11
 RM = rm -rf
 EXEC = mastermind
 SRC = src

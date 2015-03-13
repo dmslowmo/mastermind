@@ -12,6 +12,11 @@
 #include <map>
 #include <vector>
 
+#define RED_PREFIX "\033[1;31m"
+#define GREEN_PREFIX "\033[1;32m"
+#define RESET "\033[0m"
+#define BOLD_ON "\033[1;1m"
+
 namespace mastermind {
 
 class Board {

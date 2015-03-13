@@ -164,7 +164,14 @@ void Board::display(std::ostream& out, const std::vector<T>& row) const
 {
 	for (auto f : row)
 	{
-		out << f;
+		std::string prefix = "";
+		std::string postfix = "";
+		if (f == CORRECT)
+		{
+			prefix = GREEN_PREFIX;
+			postfix = RESET;
+		}
+		out << prefix << f << postfix;
 	}
 	out << std::endl;
 }
