@@ -1,7 +1,9 @@
 CC = g++
 CPPFLAGS = -I"include" -O0 -g -Wall -Wextra -pedantic -Werror -std=c++11
 RM = rm -rf
-EXEC = mastermind
+CURR_DIR := $(notdir $(shell pwd))
+#EXEC = mastermind
+EXEC := $(CURR_DIR)
 SRC = src
 SRC_FILES = $(SRC)/Board.cpp \
             $(SRC)/Game.cpp \
