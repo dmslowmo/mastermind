@@ -20,12 +20,12 @@ const int GUESS_DIGIT3 = 3;
 
 namespace {
 
-std::map<int, std::vector<char> > feedbackAllDigits;
+std::map<int, int > feedbackAllDigits;
 std::vector<char> feedback;
 
 void handleCorrectInsertion(int codeIndex)
 {
-	feedbackAllDigits[codeIndex].at(codeIndex) = CORRECT;
+	feedbackAllDigits[codeIndex] = CORRECT;
 }
 
 void handleMisplacedInsertion(int codeIndex, const std::vector<int>& code,
@@ -33,10 +33,11 @@ void handleMisplacedInsertion(int codeIndex, const std::vector<int>& code,
 {
 	for (unsigned int j = 0; j < code.size(); j++)
 	{
-		if ( (feedbackAllDigits[codeIndex].at(j) != CORRECT)
-				&& (code.at(j) == guess.at(codeIndex)) )
+		if ( j != (unsigned) codeIndex						// skip the current index because it is a misplaced anyway
+				&& code.at(j) == guess.at(codeIndex)		// the guess exists but in the wrong place
+				&& feedbackAllDigits[codeIndex] != CORRECT)	// it is not a correct guess from another digit
 		{
-			feedbackAllDigits[codeIndex].at(j) = MISPLACED;
+			feedbackAllDigits[codeIndex] = MISPLACED;
 		}
 	}
 }
@@ -44,10 +45,10 @@ void handleMisplacedInsertion(int codeIndex, const std::vector<int>& code,
 void initFeedbackPerTurn()
 {
 	feedbackAllDigits.clear();
-	feedbackAllDigits[GUESS_DIGIT0] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
-	feedbackAllDigits[GUESS_DIGIT1] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
-	feedbackAllDigits[GUESS_DIGIT2] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
-	feedbackAllDigits[GUESS_DIGIT3] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
+	feedbackAllDigits[GUESS_DIGIT0] = NULLCHAR;
+	feedbackAllDigits[GUESS_DIGIT1] = NULLCHAR;
+	feedbackAllDigits[GUESS_DIGIT2] = NULLCHAR;
+	feedbackAllDigits[GUESS_DIGIT3] = NULLCHAR;
 }
 
 std::vector<char> constructFeedback()
@@ -57,39 +58,20 @@ std::vector<char> constructFeedback()
     std::vector<char> temp = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
 	for (unsigned int codeIndex = 0; codeIndex < feedbackAllDigits.size(); ++codeIndex)
     {
-        for (unsigned int j = 0; j < feedbackAllDigits[codeIndex].size(); ++j)
-        {
-            if (feedbackAllDigits[codeIndex][j] == CORRECT)
-            {
-            	temp.at(j) = CORRECT;
-            	break;
-            }
-            else if (temp.at(j) == NULLCHAR && feedbackAllDigits[codeIndex][j] != NULLCHAR)
-            {
-            	temp.at(j) = MISPLACED;
-            	break;
-            }
-        }
+		if (feedbackAllDigits[codeIndex] == MISPLACED) {
+			feedback.push_back(feedbackAllDigits[codeIndex]);
+		}
+		else {
+			feedback.insert(feedback.begin(), feedbackAllDigits[codeIndex]);
+		}
     }
-
-	for (auto f : temp)
-	{
-		if (f == CORRECT)
-		{
-			feedback.insert(feedback.begin(), CORRECT);
-		}
-		else if (f == MISPLACED)
-		{
-			feedback.push_back(MISPLACED);
-		}
-	}
 
 	return feedback;
 }
 
 bool noMisplaced(const std::vector<char>& feedback) {
 	for (auto f : feedback) {
-		if (f == MISPLACED) {
+		if (f != CORRECT) {
 			return false;
 		}
 	}
@@ -135,7 +117,7 @@ bool Board::isCodeCracked(const std::vector<int>& guess) const
 {
 	check(code, guess);
 
-	return ((feedback.size() == code.size()) & noMisplaced(feedback));
+	return ((feedback.size() == code.size()) && noMisplaced(feedback));
 }
 
 void Board::showCode() const
