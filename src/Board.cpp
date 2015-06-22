@@ -13,10 +13,10 @@
 const char CORRECT = 'C';
 const char MISPLACED = 'M';
 const char NULLCHAR = '\0';
-const int GUESS_IDX0 = 0;
-const int GUESS_IDX1 = 1;
-const int GUESS_IDX2 = 2;
-const int GUESS_IDX3 = 3;
+const int GUESS_DIGIT0 = 0;
+const int GUESS_DIGIT1 = 1;
+const int GUESS_DIGIT2 = 2;
+const int GUESS_DIGIT3 = 3;
 
 namespace {
 
@@ -44,10 +44,10 @@ void handleMisplacedInsertion(int codeIndex, const std::vector<int>& code,
 void initFeedbackPerTurn()
 {
 	feedbackAllDigits.clear();
-	feedbackAllDigits[GUESS_IDX0] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
-	feedbackAllDigits[GUESS_IDX1] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
-	feedbackAllDigits[GUESS_IDX2] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
-	feedbackAllDigits[GUESS_IDX3] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
+	feedbackAllDigits[GUESS_DIGIT0] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
+	feedbackAllDigits[GUESS_DIGIT1] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
+	feedbackAllDigits[GUESS_DIGIT2] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
+	feedbackAllDigits[GUESS_DIGIT3] = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
 }
 
 std::vector<char> constructFeedback()
