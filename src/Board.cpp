@@ -31,10 +31,10 @@ void handleCorrectInsertion(int codeIndex)
 void handleMisplacedInsertion(int codeIndex, const std::vector<int>& code,
 		const std::vector<int>& guess)
 {
-	for (unsigned int j = 0; j < code.size(); j++)
+	for (unsigned int j = 0; j < guess.size(); j++)
 	{
 		if ( j != (unsigned) codeIndex						// skip the current index because it is a misplaced anyway
-				&& code.at(j) == guess.at(codeIndex)		// the guess exists but in the wrong place
+				&& guess.at(j) == code.at(codeIndex)		// the guess exists but in the wrong place
 				&& feedbackAllDigits[codeIndex] != CORRECT)	// it is not a correct guess from another digit
 		{
 			feedbackAllDigits[codeIndex] = MISPLACED;
