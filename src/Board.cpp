@@ -35,7 +35,7 @@ void handleMisplacedInsertion(int codeIndex, const std::vector<int>& code,
 	{
 		if ( j != (unsigned) codeIndex						// skip the current index because it is a misplaced anyway
 				&& guess.at(j) == code.at(codeIndex)		// the guess exists but in the wrong place
-				&& feedbackAllDigits[codeIndex] != CORRECT)	// it is not a correct guess from another digit
+				&& feedbackAllDigits.at(codeIndex) != CORRECT)	// it is not a correct guess from another digit
 		{
 			feedbackAllDigits[codeIndex] = MISPLACED;
 		}
