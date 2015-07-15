@@ -32,7 +32,6 @@ private:
 	void initialize();
 	void check(const std::vector<int>& code,
 			const std::vector<int>& guess) const;
-	template<typename T> void display(std::ostream& out, const std::vector<T>& row) const;
 	std::vector<int> code;
 	int codeLength;
 };

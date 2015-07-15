@@ -20,8 +20,25 @@ const int GUESS_DIGIT3 = 3;
 
 namespace {
 
-std::map<int, int > feedbackAllDigits;
+std::map<int, char> feedbackAllDigits;
 std::vector<char> feedback;
+
+template<typename T>
+void display(std::ostream& out, const std::vector<T>& row)
+{
+	for (auto f : row)
+	{
+		std::string prefix = "";
+		std::string postfix = "";
+		if (f == CORRECT)
+		{
+			prefix = GREEN_PREFIX;
+			postfix = RESET;
+		}
+		out << prefix << f << postfix;
+	}
+	out << std::endl;
+}
 
 void handleCorrectInsertion(int codeIndex)
 {
@@ -31,7 +48,7 @@ void handleCorrectInsertion(int codeIndex)
 void handleMisplacedInsertion(int codeIndex, const std::vector<int>& code,
 		const std::vector<int>& guess)
 {
-	for (unsigned int j = 0; j < guess.size(); j++)
+	for (unsigned int j = 0; j < guess.size(); ++j)
 	{
 		if ( j != (unsigned) codeIndex						// skip the current index because it is a misplaced anyway
 				&& guess.at(j) == code.at(codeIndex)		// the guess exists but in the wrong place
@@ -101,7 +118,7 @@ void Board::initialize()
 
 void Board::check(const std::vector<int>& code, const std::vector<int>& guess) const {
 	initFeedbackPerTurn();
-	for (unsigned int i = 0; i < code.size(); i++) {
+	for (unsigned int i = 0; i < code.size(); ++i) {
 		if (code.at(i) == guess.at(i)) {
 			handleCorrectInsertion(i);
 		} else {
@@ -138,24 +155,8 @@ void Board::generateCode()
 //	code = {7,7,7,0};
 //	code = {2,7,2,2};
 //	code = {6,2,6,2};
+//	code = {3,1,0,3};
 //	display(std::cout, code);
-}
-
-template<typename T>
-void Board::display(std::ostream& out, const std::vector<T>& row) const
-{
-	for (auto f : row)
-	{
-		std::string prefix = "";
-		std::string postfix = "";
-		if (f == CORRECT)
-		{
-			prefix = GREEN_PREFIX;
-			postfix = RESET;
-		}
-		out << prefix << f << postfix;
-	}
-	out << std::endl;
 }
 
 } /* namespace Mastermind */
