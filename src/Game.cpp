@@ -5,8 +5,8 @@
  *      Author: daniel
  */
 
-#include <Board.h>
-#include <Game.h>
+#include "Board.h"
+#include "Game.h"
 #include <cstdlib>
 #include <iostream>
 #include <istream>

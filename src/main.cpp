@@ -5,9 +5,9 @@
  *      Author: daniel
  */
 
-#include<iostream>
 #include "Board.h"
 #include "Game.h"
+#include <iostream>
 
 using namespace mastermind;
 

@@ -8,8 +8,6 @@
 #ifndef BOARD_H_
 #define BOARD_H_
 
-#include <iostream>
-#include <map>
 #include <vector>
 
 #define RED_PREFIX "\033[1;31m"

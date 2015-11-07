@@ -5,9 +5,11 @@
  *      Author: daniel
  */
 
-#include<cstdlib>
-#include<chrono>
 #include "Board.h"
+#include <cstdlib>
+#include <chrono>
+#include <iostream>
+#include <map>
 
 //FEEDBACK codes
 const char CORRECT = 'C';
