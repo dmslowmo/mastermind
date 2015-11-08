@@ -5,11 +5,12 @@
  *      Author: daniel
  */
 
+#include <iostream>
 #include "Board.h"
 #include "Game.h"
-#include <iostream>
 
 using namespace mastermind;
+using namespace std;
 
 int main()
 {
@@ -21,13 +22,13 @@ int main()
 	g.showOpeningScreen();
 	while (playAgain) {
 		g.play();
-		std::cout << "Play again? (Y to continue, or other keys to quit): ";
-		std::cin >> response;
+		cout << "Play again? (Y to continue, or other keys to quit): ";
+		cin >> response;
 		playAgain = (response == 'Y' || response == 'y');
-		std::cout << std::endl;
+		cout << endl;
 	}
 
-	std::cout << "Thanks for playing. Bye!" << std::endl;
+	cout << "Thanks for playing. Bye!" << endl;
 
 	return 0;
 }

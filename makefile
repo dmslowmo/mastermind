@@ -1,5 +1,4 @@
-INCLUDE	= include
-CPPFLAGS = -I$(INCLUDE) -O0 -g -Wall -Wextra -pedantic -Werror -std=c++11
+CPPFLAGS = -O0 -g -Wall -Wextra -pedantic -Werror -std=c++11
 RM = rm -rf
 CURR_DIR := $(notdir $(shell pwd))
 EXEC := $(CURR_DIR)

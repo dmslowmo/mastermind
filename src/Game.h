@@ -8,6 +8,8 @@
 #ifndef GAME_H_
 #define GAME_H_
 
+#include <vector>
+
 namespace mastermind {
 
 class Game {

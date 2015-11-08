@@ -6,6 +6,7 @@
  */
 
 #include "Board.h"
+
 #include <cstdlib>
 #include <chrono>
 #include <iostream>
@@ -20,24 +21,27 @@ const int GUESS_DIGIT1 = 1;
 const int GUESS_DIGIT2 = 2;
 const int GUESS_DIGIT3 = 3;
 
+using namespace mastermind;
+using namespace std;
+
 namespace {
 
-std::map<int, char> feedbackAllDigits;
-std::vector<char> feedback;
+map<int, char> feedbackAllDigits;
+vector<char> feedback;
 
 template<typename T>
-void display(std::ostream& out, const std::vector<T>& row)
+void display(ostream& out, const vector<T>& row)
 {
 	for (auto f : row) {
-		std::string prefix = "";
-		std::string postfix = "";
+		string prefix = "";
+		string postfix = "";
 		if (f == CORRECT) {
 			prefix = GREEN_PREFIX;
 			postfix = RESET;
 		}
 		out << prefix << f << postfix;
 	}
-	out << std::endl;
+	out << endl;
 }
 
 void handleCorrectInsertion(int codeIndex)
@@ -45,8 +49,8 @@ void handleCorrectInsertion(int codeIndex)
 	feedbackAllDigits[codeIndex] = CORRECT;
 }
 
-void handleMisplacedInsertion(int codeIndex, const std::vector<int>& code,
-		const std::vector<int>& guess)
+void handleMisplacedInsertion(int codeIndex, const vector<int>& code,
+		const vector<int>& guess)
 {
 	for (unsigned int j = 0; j < guess.size(); ++j) {
 		if ( j != (unsigned) codeIndex && guess.at(j) == code.at(codeIndex) &&
@@ -65,11 +69,11 @@ void initFeedbackPerTurn()
 	feedbackAllDigits[GUESS_DIGIT3] = NULLCHAR;
 }
 
-std::vector<char> constructFeedback()
+vector<char> constructFeedback()
 {
 	feedback.clear();
 
-	std::vector<char> temp = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
+	vector<char> temp = {NULLCHAR, NULLCHAR, NULLCHAR, NULLCHAR};
 	for (unsigned int codeIndex = 0; codeIndex < feedbackAllDigits.size(); ++codeIndex) {
 		if (feedbackAllDigits[codeIndex] == MISPLACED) {
 			feedback.push_back(feedbackAllDigits[codeIndex]);
@@ -82,7 +86,7 @@ std::vector<char> constructFeedback()
 	return feedback;
 }
 
-bool noMisplaced(const std::vector<char>& feedback) {
+bool noMisplaced(const vector<char>& feedback) {
 	for (auto f : feedback) {
 		if (f != CORRECT) {
 			return false;
@@ -92,9 +96,6 @@ bool noMisplaced(const std::vector<char>& feedback) {
 }
 
 }
-
-namespace mastermind
-{
 
 Board::Board(int codeLength) :
 		codeLength(codeLength)
@@ -113,7 +114,7 @@ void Board::initialize()
 	initFeedbackPerTurn();
 }
 
-void Board::check(const std::vector<int>& code, const std::vector<int>& guess) const {
+void Board::check(const vector<int>& code, const vector<int>& guess) const {
 	initFeedbackPerTurn();
 	for (unsigned int i = 0; i < code.size(); ++i) {
 		if (code.at(i) == guess.at(i)) {
@@ -123,11 +124,11 @@ void Board::check(const std::vector<int>& code, const std::vector<int>& guess) c
 		}
 	}
 	feedback = constructFeedback();
-	std::cout << "\t\t";
-	display(std::cout, feedback);
+	cout << "\t\t";
+	display(cout, feedback);
 }
 
-bool Board::isCodeCracked(const std::vector<int>& guess) const
+bool Board::isCodeCracked(const vector<int>& guess) const
 {
 	check(code, guess);
 	return ((feedback.size() == code.size()) && noMisplaced(feedback));
@@ -135,13 +136,13 @@ bool Board::isCodeCracked(const std::vector<int>& guess) const
 
 void Board::showCode() const
 {
-	display(std::cout, code);
+	display(cout, code);
 }
 
 void Board::generateCode()
 {
 	for (int i = 0; i < codeLength; i++) {
-		unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+		unsigned seed = chrono::system_clock::now().time_since_epoch().count();
 		srand(seed);
 		code.push_back(rand()%(codeLength*2));
 	}
@@ -150,7 +151,5 @@ void Board::generateCode()
 //	code = {2,7,2,2};
 //	code = {6,2,6,2};
 //	code = {3,1,0,3};
-//	display(std::cout, code);
+//	display(cout, code);
 }
-
-} /* namespace Mastermind */
