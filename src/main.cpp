@@ -19,8 +19,7 @@ int main()
 	Game g;
 
 	g.showOpeningScreen();
-	while (playAgain)
-	{
+	while (playAgain) {
 		g.play();
 		std::cout << "Play again? (Y to continue, or other keys to quit): ";
 		std::cin >> response;

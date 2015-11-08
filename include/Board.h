@@ -28,8 +28,7 @@ public:
 
 private:
 	void initialize();
-	void check(const std::vector<int>& code,
-			const std::vector<int>& guess) const;
+	void check(const std::vector<int>& code, const std::vector<int>& guess) const;
 	std::vector<int> code;
 	int codeLength;
 };

@@ -16,12 +16,10 @@ namespace mastermind {
 
 Game::Game() : maxAttempts(10), codeLength(4)
 {
-
 }
 
 Game::~Game()
 {
-
 }
 
 std::vector<int> Game::readGuess() {
@@ -29,8 +27,7 @@ std::vector<int> Game::readGuess() {
 	std::vector<int> guess;
 	while (std::cin >> c) {
 		guess.push_back(atoi(&c));
-		if (guess.size() == (unsigned) (codeLength))
-			break;
+		if (guess.size() == (unsigned) (codeLength)) break;
 	}
 
 	return guess;
@@ -43,12 +40,9 @@ void Game::play()
 
 	std::cout << "Game started, you have " << maxAttempts << " chances!" << std::endl;
 
-	for (int attempt = 1; attempt <= maxAttempts; attempt++)
-	{
+	for (int attempt = 1; attempt <= maxAttempts; attempt++) {
 		std::cout << "Attempt #" << attempt << ": ";
-
-		if (board.isCodeCracked(readGuess()))
-		{
+		if (board.isCodeCracked(readGuess())) {
 			std::cout << BOLD_ON << "Code is correct, you won!!!" << RESET << std::endl;
 			return;
 		}
