@@ -25,7 +25,7 @@ bool noMisplaced(const Hint& feedback) {
 	return true;
 }
 
-}
+} //unnamed namespace
 
 Board::Board(int codeLength) : codeLength(codeLength)
 {
