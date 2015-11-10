@@ -26,6 +26,11 @@ private:
 	std::vector<int> readGuess();
 };
 
+constexpr auto RedPrefix   = "\033[1;31m";
+constexpr auto GreenPrefix = "\033[1;32m";
+constexpr auto ResetColor  = "\033[0m";
+constexpr auto BoldOn      = "\033[1;1m";
+
 } /* namespace Mastermind */
 
 #endif /* GAME_H_ */
