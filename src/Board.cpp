@@ -18,7 +18,7 @@ namespace {
 map<int, char> feedbackAllDigits;
 vector<char> feedback;
 
-bool noMisplaced(const vector<char>& feedback) {
+bool noMisplaced(const Hint& feedback) {
 	for (auto f : feedback) {
 		if (f != CORRECT) {
 			return false;
@@ -45,7 +45,7 @@ void Board::initialize()
 	generateCode();
 }
 
-vector<char> Board::getHint(const vector<int>& guess) {
+Hint Board::getHint(const Code& guess) {
 	int bulls = 0;
 	int cows = 0;
 	vector<int> secretDigits(10, 0);
@@ -63,13 +63,13 @@ vector<char> Board::getHint(const vector<int>& guess) {
 		cows += min(secretDigits[i], guessDigits[i]);
 	}
 
-	vector<char> hint;
+	Hint hint;
 	for (int i = 0; i < bulls; ++i) hint.push_back(CORRECT);
 	for (int i = 0; i < cows; ++i) hint.push_back(MISPLACED);
 	return hint;
 }
 
-bool Board::isCodeCracked(const vector<char>& hint) const
+bool Board::isCodeCracked(const Hint& hint) const
 {
 	return ((hint.size() == secretCode_.size()) && noMisplaced(hint));
 }

@@ -17,18 +17,21 @@
 
 namespace mastermind {
 
+using Code = std::vector<int>;
+using Hint = std::vector<char>;
+
 class Board {
 public:
 	Board(int codeLength);
 	virtual ~Board();
 	virtual void generateCode();
 	bool isMaxAttempt() const;
-	bool isCodeCracked(const std::vector<char>& hint) const;
-	std::vector<int> secretCode() const;
-	std::vector<char> getHint(const std::vector<int>& guess);
+	bool isCodeCracked(const Hint& hint) const;
+	Code secretCode() const;
+	Hint getHint(const Code& guess);
 private:
 	void initialize();
-	std::vector<int> secretCode_;
+	Code secretCode_;
 	int codeLength;
 };
 
