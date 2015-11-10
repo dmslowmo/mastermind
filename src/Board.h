@@ -9,7 +9,6 @@
 #define BOARD_H_
 
 #include <vector>
-#include <string>
 
 namespace mastermind {
 

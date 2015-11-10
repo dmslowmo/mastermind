@@ -10,7 +10,6 @@
 #include <cstdlib>
 #include <iostream>
 #include <istream>
-#include <vector>
 
 using namespace mastermind;
 using namespace std;
