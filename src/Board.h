@@ -31,12 +31,12 @@ private:
 	int codeLength;
 };
 
-constexpr char CORRECT = 'C';
-constexpr char MISPLACED = 'M';
-constexpr auto RED_PREFIX = "\033[1;31m";
-constexpr auto GREEN_PREFIX = "\033[1;32m";
-constexpr auto RESET = "\033[0m";
-constexpr auto BOLD_ON = "\033[1;1m";
+constexpr char Correct = 'C';
+constexpr char Misplaced = 'M';
+constexpr auto RedPrefix = "\033[1;31m";
+constexpr auto GreenPrefix = "\033[1;32m";
+constexpr auto ResetColor = "\033[0m";
+constexpr auto BoldOn = "\033[1;1m";
 
 } /* namespace mastermind */
 

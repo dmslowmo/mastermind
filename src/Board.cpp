@@ -17,7 +17,7 @@ namespace {
 
 bool noMisplaced(const Hint& feedback) {
 	for (auto f : feedback) {
-		if (f != CORRECT) {
+		if (f != Correct) {
 			return false;
 		}
 	}
@@ -61,8 +61,8 @@ Hint Board::getHint(const Code& guess) {
 	}
 
 	Hint hint;
-	for (int i = 0; i < bulls; ++i) hint.push_back(CORRECT);
-	for (int i = 0; i < cows; ++i) hint.push_back(MISPLACED);
+	for (int i = 0; i < bulls; ++i) hint.push_back(Correct);
+	for (int i = 0; i < cows; ++i) hint.push_back(Misplaced);
 	return hint;
 }
 
