@@ -15,9 +15,6 @@ using namespace std;
 
 namespace {
 
-map<int, char> feedbackAllDigits;
-vector<char> feedback;
-
 bool noMisplaced(const Hint& feedback) {
 	for (auto f : feedback) {
 		if (f != CORRECT) {

@@ -35,10 +35,9 @@ private:
 	int codeLength;
 };
 
-//FEEDBACK codes
 const char CORRECT = 'C';
 const char MISPLACED = 'M';
 
-} /* namespace Mastermind */
+} /* namespace mastermind */
 
 #endif /* BOARD_H_ */
