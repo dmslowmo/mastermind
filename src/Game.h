@@ -10,6 +10,8 @@
 
 #include <vector>
 
+enum class ColorCode;
+
 namespace mastermind {
 
 class Game {
@@ -25,8 +27,8 @@ private:
 	int codeLength;
 };
 
-constexpr auto RedPrefix   = "\033[1;31m";
-constexpr auto GreenPrefix = "\033[1;32m";
+constexpr auto BoldRedPrefix   = "\033[1;31m";
+constexpr auto BoldGreenPrefix = "\033[1;32m";
 constexpr auto ResetColor  = "\033[0m";
 constexpr auto BoldOn      = "\033[1;1m";
 
