@@ -27,8 +27,7 @@ bool noMisplaced(const Hint& feedback) {
 
 }
 
-Board::Board(int codeLength) :
-		codeLength(codeLength)
+Board::Board(int codeLength) : codeLength(codeLength)
 {
 	initialize();
 }
@@ -43,7 +42,8 @@ void Board::initialize()
 	generateSecretCode();
 }
 
-Hint Board::getHint(const Code& guess) {
+Hint Board::getHint(const Code& guess)
+{
 	int bulls = 0;
 	int cows = 0;
 	vector<int> secretDigits(10, 0);

@@ -53,11 +53,8 @@ vector<int> Game::readGuess() {
 
 void Game::play()
 {
-
 	Board board(codeLength);
-
 	cout << "Game started, you have " << maxAttempts << " chances!" << endl;
-
 	for (int attempt = 1; attempt <= maxAttempts; ++attempt) {
 		cout << "Attempt #" << attempt << ": ";
 		vector<char> hint = board.getHint(readGuess());
@@ -67,7 +64,6 @@ void Game::play()
 			return;
 		}
 	}
-
 	cout << "You lost :(." << "The code is: " << RedPrefix << board.secretCode() << ResetColor << endl;
 }
 
