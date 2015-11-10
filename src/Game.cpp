@@ -9,7 +9,6 @@
 #include "Board.h"
 #include <cstdlib>
 #include <iostream>
-#include <istream>
 #include <sstream>
 #include <memory>
 
