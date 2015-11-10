@@ -23,15 +23,23 @@ public:
 	virtual ~Board();
 	virtual void generateCode();
 	bool isMaxAttempt() const;
-	bool isCodeCracked(const std::vector<int>& guess) const;
-	void showCode() const;
-
+	bool isCodeCracked(const std::vector<char>& hint) const;
+	std::vector<int> secretCode() const;
+	std::vector<char> evaluate(const std::vector<int>& guess) const;
 private:
 	void initialize();
-	void check(const std::vector<int>& code, const std::vector<int>& guess) const;
 	std::vector<int> code;
 	int codeLength;
 };
+
+//FEEDBACK codes
+const char CORRECT = 'C';
+const char MISPLACED = 'M';
+const char NULLCHAR = '\0';
+const int GUESS_DIGIT0 = 0;
+const int GUESS_DIGIT1 = 1;
+const int GUESS_DIGIT2 = 2;
+const int GUESS_DIGIT3 = 3;
 
 } /* namespace Mastermind */
 

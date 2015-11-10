@@ -6,20 +6,9 @@
  */
 
 #include "Board.h"
-
 #include <cstdlib>
 #include <chrono>
-#include <iostream>
 #include <map>
-
-//FEEDBACK codes
-const char CORRECT = 'C';
-const char MISPLACED = 'M';
-const char NULLCHAR = '\0';
-const int GUESS_DIGIT0 = 0;
-const int GUESS_DIGIT1 = 1;
-const int GUESS_DIGIT2 = 2;
-const int GUESS_DIGIT3 = 3;
 
 using namespace mastermind;
 using namespace std;
@@ -28,21 +17,6 @@ namespace {
 
 map<int, char> feedbackAllDigits;
 vector<char> feedback;
-
-template<typename T>
-void display(ostream& out, const vector<T>& row)
-{
-	for (auto f : row) {
-		string prefix = "";
-		string postfix = "";
-		if (f == CORRECT) {
-			prefix = GREEN_PREFIX;
-			postfix = RESET;
-		}
-		out << prefix << f << postfix;
-	}
-	out << endl;
-}
 
 void handleCorrectInsertion(int codeIndex)
 {
@@ -114,7 +88,7 @@ void Board::initialize()
 	initFeedbackPerTurn();
 }
 
-void Board::check(const vector<int>& code, const vector<int>& guess) const {
+vector<char> Board::evaluate(const vector<int>& guess) const {
 	initFeedbackPerTurn();
 	for (unsigned int i = 0; i < code.size(); ++i) {
 		if (code.at(i) == guess.at(i)) {
@@ -123,20 +97,17 @@ void Board::check(const vector<int>& code, const vector<int>& guess) const {
 			handleMisplacedInsertion(i, code, guess);
 		}
 	}
-	feedback = constructFeedback();
-	cout << "\t\t";
-	display(cout, feedback);
+	return constructFeedback();
 }
 
-bool Board::isCodeCracked(const vector<int>& guess) const
+bool Board::isCodeCracked(const vector<char>& hint) const
 {
-	check(code, guess);
-	return ((feedback.size() == code.size()) && noMisplaced(feedback));
+	return ((hint.size() == code.size()) && noMisplaced(hint));
 }
 
-void Board::showCode() const
+vector<int> Board::secretCode() const
 {
-	display(cout, code);
+	return code;
 }
 
 void Board::generateCode()

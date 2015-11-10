@@ -6,15 +6,32 @@
  */
 
 #include "Game.h"
-
+#include "Board.h"
 #include <cstdlib>
 #include <iostream>
 #include <istream>
 #include <vector>
-#include "Board.h"
 
 using namespace mastermind;
 using namespace std;
+
+namespace
+{
+template<typename T>
+void display(ostream& out, const vector<T>& row)
+{
+	for (auto f : row) {
+		string prefix = "";
+		string postfix = "";
+		if (f == CORRECT) {
+			prefix = GREEN_PREFIX;
+			postfix = RESET;
+		}
+		out << prefix << f << postfix;
+	}
+	out << endl;
+}
+}
 
 Game::Game() : maxAttempts(10), codeLength(4)
 {
@@ -42,16 +59,18 @@ void Game::play()
 
 	cout << "Game started, you have " << maxAttempts << " chances!" << endl;
 
-	for (int attempt = 1; attempt <= maxAttempts; attempt++) {
+	for (int attempt = 1; attempt <= maxAttempts; ++attempt) {
 		cout << "Attempt #" << attempt << ": ";
-		if (board.isCodeCracked(readGuess())) {
+		vector<char> hint = board.evaluate(readGuess());
+		display(cout, hint);
+		if (board.isCodeCracked(hint)) {
 			cout << BOLD_ON << "Code is correct, you won!!!" << RESET << endl;
 			return;
 		}
 	}
 
 	cout << "You lost :(." << "The code is: " << RED_PREFIX;
-	board.showCode();
+	display(cout, board.secretCode());
 	cout << RESET;
 }
 
