@@ -8,6 +8,7 @@
 #include "Board.h"
 #include <cstdlib>
 #include <chrono>
+#include <sstream>
 
 using namespace mastermind;
 using namespace std;
@@ -74,9 +75,9 @@ bool Board::isCodeCracked(const Hint& hint) const
 
 string Board::secretCode() const
 {
-	string code = "";
-	for (auto c : secretCode_) code.push_back(c);
-	return code;
+	ostringstream code;
+	for (auto c : secretCode_) code << c;
+	return code.str();
 }
 
 void Board::generateSecretCode()
