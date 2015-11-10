@@ -13,7 +13,7 @@
 using namespace mastermind;
 using namespace std;
 
-using SysTime = chrono::system_clock;
+using SysClock = chrono::system_clock;
 
 namespace {
 
@@ -73,7 +73,7 @@ bool Board::isCodeCracked(const Hint& hint) const
 	return ((hint.size() == secretCode_.size()) && noMisplaced(hint));
 }
 
-vector<int> Board::secretCode() const
+Code Board::secretCode() const
 {
 	return secretCode_;
 }
@@ -81,7 +81,7 @@ vector<int> Board::secretCode() const
 void Board::generateCode()
 {
 	for (int i = 0; i < codeLength; i++) {
-		unsigned seed = SysTime::now().time_since_epoch().count();
+		unsigned seed = SysClock::now().time_since_epoch().count();
 		srand(seed);
 		secretCode_.push_back(rand()%(codeLength*2));
 	}
