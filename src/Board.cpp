@@ -41,7 +41,7 @@ Board::~Board()
 void Board::initialize()
 {
 	secretCode_.clear();
-	generateCode();
+	generateSecretCode();
 }
 
 Hint Board::getHint(const Code& guess) {
@@ -78,7 +78,7 @@ Code Board::secretCode() const
 	return secretCode_;
 }
 
-void Board::generateCode()
+void Board::generateSecretCode()
 {
 	for (int i = 0; i < codeLength; i++) {
 		unsigned seed = SysClock::now().time_since_epoch().count();
