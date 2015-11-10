@@ -64,8 +64,8 @@ vector<char> Board::getHint(const vector<int>& guess) {
 	}
 
 	vector<char> hint;
-	for (int i = 0; i < bulls; ++i) hint.push_back('C');
-	for (int i = 0; i < cows; ++i) hint.push_back('M');
+	for (int i = 0; i < bulls; ++i) hint.push_back(CORRECT);
+	for (int i = 0; i < cows; ++i) hint.push_back(MISPLACED);
 	return hint;
 }
 
