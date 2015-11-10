@@ -18,12 +18,11 @@ public:
 	virtual ~Game();
 	void play();
 	void showOpeningScreen();
-
+private:
+	std::vector<int> readGuess();
 private:
 	int maxAttempts;
 	int codeLength;
-
-	std::vector<int> readGuess();
 };
 
 constexpr auto RedPrefix   = "\033[1;31m";

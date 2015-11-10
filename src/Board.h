@@ -19,13 +19,14 @@ class Board {
 public:
 	Board(int codeLength);
 	virtual ~Board();
-	virtual void generateSecretCode();
+	void generateSecretCode();
 	bool isMaxAttempt() const;
 	bool isCodeCracked(const Hint& hint) const;
 	Code secretCode() const;
 	Hint getHint(const Code& guess);
 private:
 	void initialize();
+private:
 	Code secretCode_;
 	int codeLength;
 };
