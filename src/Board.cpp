@@ -13,6 +13,8 @@
 using namespace mastermind;
 using namespace std;
 
+using SysTime = chrono::system_clock;
+
 namespace {
 
 bool noMisplaced(const Hint& feedback) {
@@ -79,7 +81,7 @@ vector<int> Board::secretCode() const
 void Board::generateCode()
 {
 	for (int i = 0; i < codeLength; i++) {
-		unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+		unsigned seed = SysTime::now().time_since_epoch().count();
 		srand(seed);
 		secretCode_.push_back(rand()%(codeLength*2));
 	}
