@@ -17,7 +17,7 @@ using namespace std;
 namespace
 {
 template<typename T>
-void display(ostream& out, const vector<T>& row)
+ostream& operator<<(ostream& os, const vector<T>& row)
 {
 	for (auto f : row) {
 		string prefix = "";
@@ -26,9 +26,9 @@ void display(ostream& out, const vector<T>& row)
 			prefix = GreenPrefix;
 			postfix = ResetColor;
 		}
-		out << prefix << f << postfix;
+		os << prefix << f << postfix;
 	}
-	out << endl;
+	return os;
 }
 }
 
@@ -61,16 +61,14 @@ void Game::play()
 	for (int attempt = 1; attempt <= maxAttempts; ++attempt) {
 		cout << "Attempt #" << attempt << ": ";
 		vector<char> hint = board.getHint(readGuess());
-		display(cout, hint);
+		cout << hint << endl;
 		if (board.isCodeCracked(hint)) {
 			cout << BoldOn << "Code is correct, you won!!!" << ResetColor << endl;
 			return;
 		}
 	}
 
-	cout << "You lost :(." << "The code is: " << RedPrefix;
-	display(cout, board.secretCode());
-	cout << ResetColor;
+	cout << "You lost :(." << "The code is: " << RedPrefix << board.secretCode() << ResetColor << endl;
 }
 
 void Game::showOpeningScreen()
