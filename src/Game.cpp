@@ -100,7 +100,7 @@ vector<int> Game::readGuess() {
 void Game::play()
 {
 	Board board(codeLength);
-	cout << "Game started, you have " << maxAttempts << " chances!" << endl;
+	cout << BoldGreen("Game started, you have " + to_string(maxAttempts) + " chances!") << endl;
 	for (int attempt = 1; attempt <= maxAttempts; ++attempt) {
 		cout << "Attempt #" << attempt << ": ";
 		vector<char> hint = board.getHint(readGuess());
@@ -129,6 +129,6 @@ void Game::showOpeningScreen()
 		 << "   Any input that is entered after the 4th digit will be ignored.\n"
 		 << "4. Upon pressing \'enter\' the code will be evaluated and the feedback will be displayed, represented by:\n"
 		 << "   a. Letter \'C\' for every digit that exists and is in the correct place.\n"
-		 << "   b. Letter \'M\' for every digit that exists but is misplaced.\n" << endl;
+		 << "   b. Letter \'M\' for every digit that exists but is misplaced.\n";
 	cout << endl;
 }
