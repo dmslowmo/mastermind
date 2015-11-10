@@ -8,7 +8,6 @@
 #include "Board.h"
 #include <cstdlib>
 #include <chrono>
-#include <map>
 
 using namespace mastermind;
 using namespace std;
