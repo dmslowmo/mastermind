@@ -11,6 +11,7 @@
 #include <iostream>
 #include <istream>
 #include <sstream>
+#include <memory>
 
 using namespace mastermind;
 using namespace std;
@@ -45,8 +46,8 @@ ostream& operator<<(ostream& os, const vector<T>& row)
 	return os;
 }
 
-template<ColorCode color>
-string boldColorPrint(const string& text)
+template<typename T, ColorCode color>
+string boldColorPrint(const T& text)
 {
 	string out = "";
 	switch (color) {
@@ -70,8 +71,10 @@ string boldColorPrint(const string& text)
 	return out;
 }
 
-string (&BoldRed)(const string&) = boldColorPrint<ColorCode::Red>;
-string (&BoldGreen)(const string&) = boldColorPrint<ColorCode::Green>;
+template <typename T>
+using ColorText = string(*)(const T&);
+ColorText<string> BoldRed = boldColorPrint<string, ColorCode::Red>;
+ColorText<string> BoldGreen = boldColorPrint<string, ColorCode::Green>;
 
 } //unnamed namespace
 
