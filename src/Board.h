@@ -9,6 +9,7 @@
 #define BOARD_H_
 
 #include <vector>
+#include <string>
 
 namespace mastermind {
 
@@ -22,7 +23,7 @@ public:
 	void generateSecretCode();
 	bool isMaxAttempt() const;
 	bool isCodeCracked(const Hint& hint) const;
-	Code secretCode() const;
+	std::string secretCode() const;
 	Hint getHint(const Code& guess);
 private:
 	void initialize();

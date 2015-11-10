@@ -72,9 +72,11 @@ bool Board::isCodeCracked(const Hint& hint) const
 	return ((hint.size() == secretCode_.size()) && noMisplaced(hint));
 }
 
-Code Board::secretCode() const
+string Board::secretCode() const
 {
-	return secretCode_;
+	string code = "";
+	for (auto c : secretCode_) code.push_back(c);
+	return code;
 }
 
 void Board::generateSecretCode()

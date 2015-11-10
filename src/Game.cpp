@@ -107,10 +107,7 @@ void Game::play()
 			return;
 		}
 	}
-	cout << "You lost :(." << "The code is: ";
-	ostringstream os;
-	os << board.secretCode();
-	cout << BoldRed(os.str()) << endl;
+	cout << "You lost :(." << "The code is: " << BoldRed(board.secretCode()) << endl;
 }
 
 void Game::showOpeningScreen()
