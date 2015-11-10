@@ -9,11 +9,7 @@
 #define BOARD_H_
 
 #include <vector>
-
-#define RED_PREFIX "\033[1;31m"
-#define GREEN_PREFIX "\033[1;32m"
-#define RESET "\033[0m"
-#define BOLD_ON "\033[1;1m"
+#include <string>
 
 namespace mastermind {
 
@@ -35,8 +31,12 @@ private:
 	int codeLength;
 };
 
-const char CORRECT = 'C';
-const char MISPLACED = 'M';
+constexpr char CORRECT = 'C';
+constexpr char MISPLACED = 'M';
+constexpr std::string RED_PREFIX = "\033[1;31m";
+constexpr std::string GREEN_PREFIX = "\033[1;32m";
+constexpr std::string RESET = "\033[0m";
+constexpr std::string BOLD_ON = "\033[1;1m";
 
 } /* namespace mastermind */
 
