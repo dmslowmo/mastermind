@@ -28,7 +28,7 @@ public:
 	std::vector<char> getHint(const std::vector<int>& guess);
 private:
 	void initialize();
-	std::vector<int> code;
+	std::vector<int> secretCode_;
 	int codeLength;
 };
 

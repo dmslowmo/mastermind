@@ -41,7 +41,7 @@ Board::~Board()
 
 void Board::initialize()
 {
-	code.clear();
+	secretCode_.clear();
 	generateCode();
 }
 
@@ -50,8 +50,8 @@ vector<char> Board::getHint(const vector<int>& guess) {
 	int cows = 0;
 	vector<int> secretDigits(10, 0);
 	vector<int> guessDigits(10, 0);
-	for (size_t i = 0; i < code.size(); ++i) {
-		int s = code[i];
+	for (size_t i = 0; i < secretCode_.size(); ++i) {
+		int s = secretCode_[i];
 		int g = guess[i];
 		if (s == g) ++bulls;
 		else {
@@ -71,12 +71,12 @@ vector<char> Board::getHint(const vector<int>& guess) {
 
 bool Board::isCodeCracked(const vector<char>& hint) const
 {
-	return ((hint.size() == code.size()) && noMisplaced(hint));
+	return ((hint.size() == secretCode_.size()) && noMisplaced(hint));
 }
 
 vector<int> Board::secretCode() const
 {
-	return code;
+	return secretCode_;
 }
 
 void Board::generateCode()
@@ -84,7 +84,7 @@ void Board::generateCode()
 	for (int i = 0; i < codeLength; i++) {
 		unsigned seed = chrono::system_clock::now().time_since_epoch().count();
 		srand(seed);
-		code.push_back(rand()%(codeLength*2));
+		secretCode_.push_back(rand()%(codeLength*2));
 	}
 
 //	code = {7,7,7,0};
