@@ -33,10 +33,10 @@ private:
 
 constexpr char CORRECT = 'C';
 constexpr char MISPLACED = 'M';
-constexpr std::string RED_PREFIX = "\033[1;31m";
-constexpr std::string GREEN_PREFIX = "\033[1;32m";
-constexpr std::string RESET = "\033[0m";
-constexpr std::string BOLD_ON = "\033[1;1m";
+constexpr auto RED_PREFIX = "\033[1;31m";
+constexpr auto GREEN_PREFIX = "\033[1;32m";
+constexpr auto RESET = "\033[0m";
+constexpr auto BOLD_ON = "\033[1;1m";
 
 } /* namespace mastermind */
 
