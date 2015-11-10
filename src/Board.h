@@ -35,11 +35,6 @@ private:
 //FEEDBACK codes
 const char CORRECT = 'C';
 const char MISPLACED = 'M';
-const char NULLCHAR = '\0';
-const int GUESS_DIGIT0 = 0;
-const int GUESS_DIGIT1 = 1;
-const int GUESS_DIGIT2 = 2;
-const int GUESS_DIGIT3 = 3;
 
 } /* namespace Mastermind */
 
