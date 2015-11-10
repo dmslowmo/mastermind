@@ -61,7 +61,7 @@ void Game::play()
 
 	for (int attempt = 1; attempt <= maxAttempts; ++attempt) {
 		cout << "Attempt #" << attempt << ": ";
-		vector<char> hint = board.evaluate(readGuess());
+		vector<char> hint = board.getHint(readGuess());
 		display(cout, hint);
 		if (board.isCodeCracked(hint)) {
 			cout << BOLD_ON << "Code is correct, you won!!!" << RESET << endl;

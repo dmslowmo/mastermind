@@ -25,7 +25,7 @@ public:
 	bool isMaxAttempt() const;
 	bool isCodeCracked(const std::vector<char>& hint) const;
 	std::vector<int> secretCode() const;
-	std::vector<char> evaluate(const std::vector<int>& guess) const;
+	std::vector<char> getHint(const std::vector<int>& guess);
 private:
 	void initialize();
 	std::vector<int> code;

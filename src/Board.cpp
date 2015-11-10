@@ -88,16 +88,28 @@ void Board::initialize()
 	initFeedbackPerTurn();
 }
 
-vector<char> Board::evaluate(const vector<int>& guess) const {
-	initFeedbackPerTurn();
-	for (unsigned int i = 0; i < code.size(); ++i) {
-		if (code.at(i) == guess.at(i)) {
-			handleCorrectInsertion(i);
-		} else {
-			handleMisplacedInsertion(i, code, guess);
+vector<char> Board::getHint(const vector<int>& guess) {
+	int bulls = 0;
+	int cows = 0;
+	vector<int> secretDigits(10, 0);
+	vector<int> guessDigits(10, 0);
+	for (size_t i = 0; i < code.size(); ++i) {
+		int s = code[i];
+		int g = guess[i];
+		if (s == g) ++bulls;
+		else {
+			++secretDigits[s];
+			++guessDigits[g];
 		}
 	}
-	return constructFeedback();
+	for (int i = 0; i < 10; ++i) {
+		cows += min(secretDigits[i], guessDigits[i]);
+	}
+
+	vector<char> hint;
+	for (int i = 0; i < bulls; ++i) hint.push_back('C');
+	for (int i = 0; i < cows; ++i) hint.push_back('M');
+	return hint;
 }
 
 bool Board::isCodeCracked(const vector<char>& hint) const
