@@ -1,9 +1,14 @@
-Simple CLI Mastermind game
+A Simple CLI Mastermind Game
 
-To build:
-Inside Mastermind folder, execute: make
-An executable named 'mastermind' will be generated.
+Integers from 0 - 9 are used to replace the colors.
 
-To clean:
-Inside Mastermind folder, execute: make clean
+Instructions
+============
+Build:
+In root folder, execute 'make'
+Execute 'make clean' to remove all object and executable files
+
+Play:
+Enter 4-digit codes using integers 0 - 9 and press enter at each attempt.
+Maximum of 10 attempts allowed.
 
