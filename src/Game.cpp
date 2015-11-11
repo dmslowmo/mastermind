@@ -15,7 +15,7 @@
 using namespace mastermind;
 using namespace std;
 
-enum class ColorCode
+enum class Color
 {
 	Black,
 	Red,
@@ -45,25 +45,25 @@ ostream& operator<<(ostream& os, const vector<T>& row)
 	return os;
 }
 
-template<typename T, ColorCode color>
+template<typename T, Color color>
 string boldColorPrint(const T& text)
 {
 	string out = "";
 	switch (color) {
-	case ColorCode::Black: break;
-	case ColorCode::Red: {
+	case Color::Black: break;
+	case Color::Red: {
 		out += BoldRedPrefix;
 		break;
 	}
-	case ColorCode::Green: {
+	case Color::Green: {
 		out += BoldGreenPrefix;
 		break;
 	}
-	case ColorCode::Yellow: break;
-	case ColorCode::Blue: break;
-	case ColorCode::Magenta: break;
-	case ColorCode::Cyan: break;
-	case ColorCode::White: break;
+	case Color::Yellow: break;
+	case Color::Blue: break;
+	case Color::Magenta: break;
+	case Color::Cyan: break;
+	case Color::White: break;
 	default: break;
 	}
 	out += text + ResetColor;
@@ -72,8 +72,8 @@ string boldColorPrint(const T& text)
 
 template <typename T>
 using ColorText = string(*)(const T&);
-ColorText<string> BoldRed = boldColorPrint<string, ColorCode::Red>;
-ColorText<string> BoldGreen = boldColorPrint<string, ColorCode::Green>;
+ColorText<string> BoldRed = boldColorPrint<string, Color::Red>;
+ColorText<string> BoldGreen = boldColorPrint<string, Color::Green>;
 
 } //unnamed namespace
 

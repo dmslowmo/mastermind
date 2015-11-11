@@ -44,26 +44,26 @@ void Board::initialize()
 
 Hint Board::getHint(const Code& guess)
 {
-	int bulls = 0;
-	int cows = 0;
+	int correct = 0;
+	int misplaced = 0;
 	vector<int> secretDigits(10, 0);
 	vector<int> guessDigits(10, 0);
 	for (size_t i = 0; i < secretCode_.size(); ++i) {
 		int s = secretCode_[i];
 		int g = guess[i];
-		if (s == g) ++bulls;
+		if (s == g) ++correct;
 		else {
 			++secretDigits[s];
 			++guessDigits[g];
 		}
 	}
 	for (int i = 0; i < 10; ++i) {
-		cows += min(secretDigits[i], guessDigits[i]);
+		misplaced += min(secretDigits[i], guessDigits[i]);
 	}
 
 	Hint hint;
-	for (int i = 0; i < bulls; ++i) hint.push_back(Correct);
-	for (int i = 0; i < cows; ++i) hint.push_back(Misplaced);
+	for (int i = 0; i < correct; ++i) hint.push_back(Correct);
+	for (int i = 0; i < misplaced; ++i) hint.push_back(Misplaced);
 	return hint;
 }
 

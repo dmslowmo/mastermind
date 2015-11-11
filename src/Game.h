@@ -10,7 +10,7 @@
 
 #include <vector>
 
-enum class ColorCode;
+enum class Color;
 
 namespace mastermind {
 
@@ -29,8 +29,8 @@ private:
 
 constexpr auto BoldRedPrefix   = "\033[1;31m";
 constexpr auto BoldGreenPrefix = "\033[1;32m";
-constexpr auto ResetColor  = "\033[0m";
-constexpr auto BoldOn      = "\033[1;1m";
+constexpr auto ResetColor      = "\033[0m";
+constexpr auto BoldOn          = "\033[1;1m";
 
 } /* namespace Mastermind */
 
