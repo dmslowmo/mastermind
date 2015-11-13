@@ -1,4 +1,5 @@
 #Mastermind game
+----------------
 A Simple CLI Mastermind Game
 
 Integers from 0 - 9 are used to replace the colors.
