@@ -1,4 +1,4 @@
-#Mastermind game
+Mastermind game
 ================
 A Simple CLI Mastermind Game
 
