@@ -1,5 +1,5 @@
 # Flags
-CPP_FLAGS := -O0 -g -Wall -Wextra -pedantic -Werror -std=c++11
+CPP_FLAGS := -O0 -g -Wall -Wextra -pedantic -Werror -std=c++20
 
 # Commands
 RM := rm -rf
@@ -18,6 +18,7 @@ OBJ := $(patsubst $(SRC_PATH)%, $(OBJ_PATH)%, $(OBJ1))
 # Target name
 EXEC := $(CURR_DIR)
 
+
 # Build .o first
 $(OBJ_PATH)%.o: $(SRC_PATH)%.cpp
 	$(MKDIR_P) $(OBJ_PATH)
@@ -26,6 +27,8 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.cpp
 # Build the executable
 $(EXEC): $(OBJ)
 	$(CXX) $(CPP_FLAGS) -o $@ $^
+
+all: $(EXEC)
 
 # Clean executable and object files
 clean:
